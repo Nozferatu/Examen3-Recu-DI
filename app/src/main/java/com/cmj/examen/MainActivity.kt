@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val sharedPreferences = getSharedPreferences("usuarios", MODE_PRIVATE)
-        val usuariosSP = sharedPreferences.getString("arrayUsuarios", "")
+        val usuariosSP = sharedPreferences.getString("arrayUsuarios", null)
         var arrayUsuarios = mutableListOf<String>()
 
         if(usuariosSP != null){
@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity() {
                     }else hacerTostada(contexto, "La contraseña está vacío")
                 }else {
                     hacerTostada(contexto, "El usuario está vacío")
-                    /*
-                    sharedPreferences.edit {
-                        putString("arrayUsuarios", "")
-                        apply()
-                    }*/
+
+//                    sharedPreferences.edit {
+//                        putString("arrayUsuarios", "")
+//                        apply()
+//                    }
                 }
             }
 

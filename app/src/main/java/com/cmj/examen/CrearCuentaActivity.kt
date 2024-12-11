@@ -27,7 +27,7 @@ class CrearCuentaActivity : AppCompatActivity() {
         }
 
         val sharedPreferences = getSharedPreferences("usuarios", MODE_PRIVATE)
-        val usuariosSP = sharedPreferences.getString("arrayUsuarios", "")
+        val usuariosSP = sharedPreferences.getString("arrayUsuarios", null)
         var arrayUsuarios = mutableListOf<String>()
 
         if(usuariosSP != null){
@@ -51,25 +51,27 @@ class CrearCuentaActivity : AppCompatActivity() {
                                 password.toString().length >= 8){
                                 var datosUsuario = "$nombre|$password"
 
-                                if(email?.isNotEmpty() == true) {
-                                    if(arrayUsuarios.size > 1){
-                                        var emailExiste = false
+                                var emailExiste = false
 
+                                if(email?.isNotEmpty() == true) {
+                                    if(arrayUsuarios[0] != ""){
                                         for(user in arrayUsuarios){
                                             val emailUsuario = user.split("|")[2]
 
                                             if(emailUsuario.equals(email)){
                                                 emailExiste = true
+                                                break
                                             }
                                         }
 
-                                        if(!emailExiste) datosUsuario += "|$email"
                                     }
 
-                                    else hacerTostada(contexto, "El email ya existe")
                                 }
 
-                                if(arrayUsuarios.size > 0){
+                                if(!emailExiste) datosUsuario += "|$email"
+                                else hacerTostada(contexto, "El email ya existe")
+
+                                if(arrayUsuarios[0] != ""){
                                     arrayUsuarios.add(";$datosUsuario")
                                 }else arrayUsuarios.add(datosUsuario)
 

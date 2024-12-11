@@ -59,7 +59,7 @@ class ListadoUsuariosActivity : AppCompatActivity() {
                         password = datosUsuario[1]
                         email = datosUsuario[2]
 
-                        if(email.equals(emailInput)){
+                        if(email == emailInput.toString()){
                             existe = true
                             break
                         }
